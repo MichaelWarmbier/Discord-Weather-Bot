@@ -12,7 +12,7 @@ async def getWeatherViaZip(zipcode, countrycode, units):
   if units.lower() != 'imperial' and units.lower() != 'metric':
     return 'Invalid unit of measurement'
 
-  response = requests.get('http://api.openweathermap.org/data/2.5/weather?zip=' + zipcode + ',' + countrycode + '&appid=270a656651f64bb2de710a5bba3df6c7&units=' + units)
+  response = requests.get('http://api.openweathermap.org/data/2.5/weather?zip=' + zipcode + ',' + countrycode + '&appid=' +os.environ['API_KEY'] + '&units=' + units)
   data = response.json()
 
   if data['cod'] == '404':
