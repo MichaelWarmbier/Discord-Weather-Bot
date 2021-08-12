@@ -9,15 +9,19 @@ client = discord.Client(); # Initialize client
 
 async def getWeatherViaZip(zipcode, countrycode, units):
 
+  # If units of measurement is invalid, return with error
   if units.lower() != 'imperial' and units.lower() != 'metric':
     return 'Invalid unit of measurement'
 
+  # Request information and store response as json data
   response = requests.get('http://api.openweathermap.org/data/2.5/weather?zip=' + zipcode + ',' + countrycode + '&appid=' +os.environ['API_KEY'] + '&units=' + units)
   data = response.json()
 
+  # If data.cod is 404, something went wrong
   if data['cod'] == '404':
     return 'Incorrect information. Use $help for more info.'
-
+ 
+  # Store data
   weather = data['weather'][0]['main']
   temp = data['main']['temp']
   feelslike = data['main']['feels_like']
@@ -31,7 +35,8 @@ async def getWeatherViaZip(zipcode, countrycode, units):
   else:
     unit = 'c'
 
-  return str(f"Weather: {weather}\nTemperature: {temp}°{unit}\nFeels like: {feelslike}\nHumidity: {humid}\nRange: {min}°{unit} - {max}°{unit}\nLocation: {location}")
+  # Return results
+  return str(f"Weather: {weather}\nTemperature: {temp}°{unit}\nFeels like: {feelslike}°{unit}\nHumidity: {humid}%\nRange: {min}°{unit} - {max}°{unit}\nLocation: {location}")
 
 @client.event
 async def on_ready(): # When bot is turned on:
