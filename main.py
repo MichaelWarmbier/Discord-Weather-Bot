@@ -2,8 +2,16 @@ import discord
 import requests   
 import os         
 import json
+from datetime import datetime
 
 client = discord.Client(); # Initialize client
+
+# ANSI colors
+class t_colors:
+    NAME = '\033[94m'
+    INFO = '\033[92m'
+    ERROR = '\033[93m'
+    NOCOLOR = '\033[0m'
 
 ### Command Methods ###
 
@@ -11,6 +19,7 @@ async def getWeatherViaZip(zipcode, countrycode, units):
 
   # If units of measurement is invalid, return with error
   if units.lower() != 'imperial' and units.lower() != 'metric':
+    print(t_colors.ERROR + 'Error: Invalid units.' + t_colors.NOCOLOR)
     return 'Invalid unit of measurement'
 
   # Request information and store response as json data
@@ -19,6 +28,7 @@ async def getWeatherViaZip(zipcode, countrycode, units):
 
   # If data.cod is 404, something went wrong
   if data['cod'] == '404':
+    print(t_colors.ERROR + 'Error: Incorrect information.' + t_colors.NOCOLOR)
     return 'Incorrect information. Use $help for more info.'
  
   # Store data
@@ -40,13 +50,21 @@ async def getWeatherViaZip(zipcode, countrycode, units):
 
 @client.event
 async def on_ready(): # When bot is turned on:
-  print(f'Bot client started\nLogged in as {client.user}')
+  print(f'Bot client started\nLogged in as {client.user}\n')
 
 @client.event
 async def on_message(message): # When a message is sent:
 
+  server = message.guild
+  user = message.author
+  today = datetime.now()
+  dateAndTime = today.strftime("%d/%m/%Y %H:%M")
+
   if message.author == client.user: # If sender is the bot itself
     return
+
+  if message.content.startswith('$'): # Debugging log
+      print('Message from: ' + t_colors.NAME + f'"{server}"' + t_colors.NOCOLOR + '\n' + t_colors.NAME + f'{user}:' + t_colors.NOCOLOR + f'"{message.content}"\n' + t_colors.INFO + f'{dateAndTime}' + t_colors.NOCOLOR)
   
   # Returns message showing that the bot is currently working
   if message.content.startswith('$ping'):
@@ -66,6 +84,7 @@ async def on_message(message): # When a message is sent:
       result = await getWeatherViaZip(command[1], command[2], 'metric')
       await message.channel.send(result)
     else:
+      print(t_colors.ERROR + 'Error: Invalid number of arguments.' + t_colors.NOCOLOR)
       await message.channel.send('Invalid number of arguments')
       return
     
