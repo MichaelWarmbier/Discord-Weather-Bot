@@ -4,7 +4,7 @@ import os
 import json
 from datetime import datetime
 
-client = discord.Client(); # Initialize client
+client = discord.Client() # Initialize client
 
 # ANSI colors
 class t_colors:
@@ -58,7 +58,7 @@ async def on_message(message): # When a message is sent:
   server = message.guild
   user = message.author
   today = datetime.now()
-  dateAndTime = today.strftime("%d/%m/%Y %H:%M")
+  dateAndTime = today.strftime("%m/%d/%Y %H:%M")
 
   if message.author == client.user: # If sender is the bot itself
     return
@@ -72,7 +72,7 @@ async def on_message(message): # When a message is sent:
 
   # Returns message showing instructions on how to use each command
   if message.content.startswith('$help'):
-      await message.channel.send('**$help**\nInstructions on each command\n\n**$ping**\nShows bot information and status\n\n**$getweather <zipcode> <countrycode> <units>** *OR* **$getweather <zipcode> <countrycode>**\nGet current weather data. Default units are metric.\nList of country codes: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes')
+      await message.channel.send('**$help**\nInstructions on each command\n\n**$ping**\nShows bot information and status\n\n**$getweather <zipcode> <countrycode> <units>** \nOR\n **$getweather <zipcode> <countrycode>**\nGet current weather data. Default units are metric.\nList of country codes: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes')
 
   # Retrieves weather based on location
   if message.content.startswith('$getweather'):
