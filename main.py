@@ -4,7 +4,7 @@ import os
 import json
 from datetime import datetime
 
-client = discord.Client() # Initialize client
+client = discord.Client() # Initialize client 
 
 # ANSI colors
 class t_colors:
