@@ -12,12 +12,12 @@ Application created, documentation written, by Michael Warmbier.<br>
     + [Adding to Your Server](#adding-to-your-server)
     + [How It Works](#how-it-works)
     + [Commands](#commands)
-    + [[Libraries]](#-libraries-)
-    + [[Classes]](#-classes-)
-    + [[Filesystem]](#-filesystem-)
-    + [[Methods]](#-methods-)
-      - [<u>Utility Methods<u/>](#-u-utility-methods-u--)
-      - [<u>Command Methods<u/>](#-u-command-methods-u--)
+    + [[Libraries]](#libraries)
+    + [[Classes]](#classes)
+    + [[Filesystem]](#filesystem)
+    + [[Methods]](#methods)
+      - [<u>Utility Methods<u/>](#utility-methods)
+      - [<u>Command Methods<u/>](#command-methods)
  
 
 ## Information
@@ -69,7 +69,7 @@ As a bot-application, **Discord Weather Bot** is always running. It awaits messa
 
 ## Backend
 
-### [Libraries]
+### Libraries
 
 This section highlights each library and their specific use within the application
 
@@ -77,8 +77,8 @@ This section highlights each library and their specific use within the applicati
 ```py
 import discord			# Tools to access Discord through its API
 import request			# Function to request information from OpenweatherAPI endpoint
-import os				# Used for environmental secrets
-import json				# Functions for JSON to Dict conversion
+import os			# Used for environmental secrets
+import json			# Functions for JSON to Dict conversion
 import hashlib			# Functions for hashing strings
 import datetime			# Functions for grabbing timestamp information
 ```
@@ -87,7 +87,7 @@ import datetime			# Functions for grabbing timestamp information
 
 ---
 
-### [Classes]
+### Classes
 
 This section highlights the classes specifically defined within the source code. 
 
@@ -96,16 +96,16 @@ class t_colors
 	# Contained information for Strings which display console output with color
 ```
 ---
-### [Filesystem]
+### Filesystem
 
 `main.py`:   	Main script for application<br>
 `server.json`:  Storage location for user / guild preferences.
 
 ---
 
-### [Methods]
+### Methods
 
-#### <u>Utility Methods<u/>
+#### Utility Methods
 
 ```py
 async def updateServerInfo(what, title, pref, data) 
@@ -123,7 +123,7 @@ async def hash(str)
 **Parameters**: *str*:String(*any*) <br>
 **Returns**: String
 <br><br>
-#### <u>Command Methods<u/>
+#### Command Methods
 
 ```py
 async def getWeatherViaZip(zipcode, countrycode, units, privacy)
@@ -133,7 +133,7 @@ async def getWeatherViaZip(zipcode, countrycode, units, privacy)
 **Parameters**:  <br>*zipcode*:String(*any*) <br> *countrycode*:String(*any*) <br>*units*:String('metric', 'imperial') <br> *privacy*:String('public', 'private') <br>
 **Returns**: String
 <br><br>
-#### <u>Event Scripts<u/>
+#### Event Scripts
 
 ```py
 @client.event
