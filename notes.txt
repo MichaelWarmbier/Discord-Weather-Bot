@@ -1,1 +1,2 @@
-- Add "Error" function
+- Error thrown when missing zipcode, no handle
+- Error thrown when missing info, no handle

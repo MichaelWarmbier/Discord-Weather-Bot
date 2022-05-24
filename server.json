@@ -3,9 +3,27 @@
     "userPref": {
         "8cbc111a9a4a5eff7d7af633a3c2ddcc": {
             "privacy": "private",
-            "zipcode": "10307",
+            "zipcode": "L6V",
             "country": "us",
             "units": "imperial"
+        },
+        "5337dcd1b25c6e426a631e31545d71d3": {
+            "privacy": "private",
+            "zipcode": "60108",
+            "country": "us",
+            "units": "metric"
+        },
+        "9e12a62361ebbf3b5ba84084d2376bd4": {
+            "privacy": "private",
+            "zipcode": "L6V",
+            "country": "ca",
+            "units": "metric"
+        },
+        "4b3fa279cfbb30a381c8a5bd97d02e79": {
+            "privacy": "public",
+            "zipcode": "10305",
+            "country": "us",
+            "units": "metric"
         }
     }
 }

@@ -13,7 +13,6 @@ with open('server.json', 'r') as f:
 class t_colors:
     NAME = '\033[94m'
     INFO = '\033[92m'
-    ERROR = '\033[93m'
     NOCOLOR = '\033[0m'
 
 ### Utility Methods ###
@@ -28,7 +27,7 @@ async def updateServerInfo(what, title, pref, data):
     else:
       newUser = {
         "privacy": "public",
-        "zipcode": 0,
+        "zipcode": '0',
         "country": "us",
         "units": "metric"
       }
@@ -47,8 +46,8 @@ async def getWeatherViaZip(zipcode, countrycode, units, privacy):
 
   # If units of measurement is invalid, return with error
   if units.lower() != 'imperial' and units.lower() != 'metric':
-    print(t_colors.ERROR + 'Error: Invalid units.' + t_colors.NOCOLOR)
     return 'Invalid unit of measurement'
+    raise Exception("Invalid unit of measurement")
 
   # Request information and store response as json data
   response = requests.get('http://api.openweathermap.org/data/2.5/weather?zip=' + zipcode + ',' + countrycode + '&appid=' +os.environ['API_KEY'] + '&units=' + units)
@@ -56,8 +55,9 @@ async def getWeatherViaZip(zipcode, countrycode, units, privacy):
 
   # If data.cod is 404, something went wrong
   if data['cod'] == '404':
-    print(t_colors.ERROR + 'Error: Incorrect information.' + t_colors.NOCOLOR)
     return 'Incorrect information. Use $help for more info.'
+    raise Exception("Incorrect information")
+
  
   # Store data
   weather = data['weather'][0]['main']
@@ -106,7 +106,7 @@ async def on_message(message): # When a message is sent:
 
   # Returns message showing instructions on how to use each command
   if message.content.startswith('$help'):
-      await message.channel.send('```$help```\nInstructions on each command\n\n```$ping```\nShows bot information and status\n\n```$updatePrefs```\nAllows you to set specific preferences for easier use\n\nPreferences: *privacy, zipcode, country, units*\nPrivacy options: *public, private*\nUnit options: *imperial, metric*\n\nDM me to update your settings in private!\n\n```$weather <zipcode> <countrycode> <units>``` \nOR\n ```$weather <zipcode> <countrycode>``` \nOR\n ```$weather // only works with set preferences```\n\nGet current weather data. Default units are metric.\nList of country codes: https://www.iso.org/obp/ui/#search')
+      await message.channel.send('```$help```\nInstructions on each command\n\n```$ping```\nShows bot information and status\n\n```$updatePrefs <preference> <value>```\nAllows you to set specific preferences for easier use\n\nPreferences: *privacy, zipcode, country, units*\nPrivacy options: *public, private*\nUnit options: *imperial, metric*\n\nDM me to update your settings in private!\n\n```$weather <zipcode> <countrycode> <units>``` \nOR\n ```$weather <zipcode> <countrycode>``` \nOR\n ```$weather // only works with set preferences```\n\nGet current weather data. Default units are metric.\nList of country codes: https://www.iso.org/obp/ui/#search')
 
   # Retrieves weather based on location
   if message.content.startswith('$weather'):
@@ -127,13 +127,16 @@ async def on_message(message): # When a message is sent:
         privacy = server['userPref'][user]['privacy']
         units = server['userPref'][user]['units']
 
+      if zipcode == '0':
+        await message.channel.send('User has no postal/zip code!')
+        raise Exception("Missing zipcode")
+
       result = await getWeatherViaZip(zipcode, country, units, privacy)
       await message.channel.send(result)
       return
     else:
-      print(t_colors.ERROR + 'Error: Invalid number of arguments.' + t_colors.NOCOLOR)
       await message.channel.send('Invalid number of arguments')
-      return
+      raise Exception("Invalid number of arguments")
 
   if message.content.startswith('$updatePrefs'):
     command = (message.content).split(' ')
@@ -142,12 +145,12 @@ async def on_message(message): # When a message is sent:
         await updateServerInfo('userPref', user, command[1], command[2])
         await message.channel.send('Updated preferences successfully')
       else:
-        print(t_colors.ERROR + 'Error: Invalid argument.' + t_colors.NOCOLOR)
         await message.channel.send('Invalid argument')
+        raise Exception("Invalid argument")
     else:
-      print(t_colors.ERROR + 'Error: Invalid number of arguments.' + t_colors.NOCOLOR)
       await message.channel.send('Invalid number of arguments')
-      return
+      raise Exception("Invalid number of arguments")
+
         
       
     
