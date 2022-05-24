@@ -73,14 +73,17 @@ As a bot-application, **Discord Weather Bot** is always running. It awaits messa
 
 This section highlights each library and their specific use within the application
 
+
 ```py
 import discord			# Tools to access Discord through its API
 import request			# Function to request information from OpenweatherAPI endpoint
-import os				    # Used for environmental secrets
-import json				  # Functions for JSON to Dict conversion
+import os				# Used for environmental secrets
+import json				# Functions for JSON to Dict conversion
 import hashlib			# Functions for hashing strings
 import datetime			# Functions for grabbing timestamp information
 ```
+
+---
 
 ---
 
