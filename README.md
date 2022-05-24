@@ -141,7 +141,7 @@ async def on_ready():
 ```
 **Event**:  Application starts <br>
 **Description**: Displays message showing successful bot startup.<br> <br>
-**Parameters**: None
+**Parameters**: None<br>
 **Returns**: None
 <br><br>
 
