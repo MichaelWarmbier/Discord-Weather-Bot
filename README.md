@@ -69,7 +69,8 @@ As a bot-application, **Discord Weather Bot** is always running. It awaits messa
 
 ## Backend
 	
-![example](https://cdn.discordapp.com/attachments/925197332151169034/978747800516968508/index.png)
+
+![example](diagram.png)
 
 ### Libraries
 
