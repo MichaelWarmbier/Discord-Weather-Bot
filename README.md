@@ -24,13 +24,11 @@ Application created, documentation written, by Michael Warmbier.<br>
 
 ### Description
 
-This document goes over the structure and logic of the [Discord Weather Bot](https://replit.com/@Kirbout/Discord-Weather-Bot) created by [Michael Warmbier](http://michaelwarmbier.com).
+This document goes over the structure, logic and use of the [Discord Weather Bot](https://replit.com/@Kirbout/Discord-Weather-Bot) created by [Michael Warmbier](http://michaelwarmbier.com).
 
 Information retrieved from the bot from the [openweatherapi](https://openweathermap.org/).
 
 The Discord Weather Bot is a free application designed to run within Discord servers, receiving necessary information from users and returning their local weather.
-
-Written originally in Markdown.
 
 ### Adding to Your Server
 
