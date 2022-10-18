@@ -4,6 +4,8 @@
 Application created, documentation written, by Michael Warmbier.<br>
  Last Updated: 5/23/22
 
+**NOTE** This bot was made prior to the Discord update requiring all bots to use slash commands. As a result, it may no longer function.
+
 ## Table of Contents
 
 - [Discord Weather Bot](#discord-weather-bot)
